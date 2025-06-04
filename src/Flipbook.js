@@ -969,7 +969,7 @@ Habló con nosotros de fútbol, nos firmó balones y camisetas, ¡hasta le dio u
         <div className="page">
           <h2>Enlace a la compra</h2>
           <p>Adquiere tu copia completa en nuestra página de lanzamiento:</p>
-          <a href="javascript:void(0)">👉 Ir a la Landing Page</a>
+          <button onClick={() => window.location.href = "URL-DE-TU-LANDING-PAGE"}>👉 Ir a la Landing Page</button>
         </div>
       </HTMLFlipBook>
     </div>
