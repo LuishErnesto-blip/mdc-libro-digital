@@ -121,42 +121,104 @@ Asistencia técnica paso a paso, validando código, resolviendo errores de sinta
 
 Trabajo con Co-Pilot (04 junio 2025)
 
-📌 1️⃣ CREACIÓN DE CUENTAS Y CONFIGURACIÓN INICIAL
-✅ GitHub: 🔹 Creamos una cuenta para gestionar el código de la app "Libro Digital" (mdc-libro-digital). 🔹 Subimos el repositorio inicial a GitHub para tener control de versiones. 📌 ¿Por qué es importante? Nos permite guardar cambios, compartir código y desplegarlo en Vercel fácilmente.
+1️⃣ CREACIÓN DE CUENTAS Y CONFIGURACIÓN INICIAL
+✅ GitHub → Lo usamos para gestionar el código fuente del libro digital y la landing. 🔹 Creamos el repositorio mdc-libro-digital para la app del libro digital. 🔹 Creamos mdc-landing para la página promocional. 🔹 Subimos los archivos iniciales a GitHub con:
 
-✅ Vercel: 🔹 Creamos una cuenta en Vercel para hacer el despliegue de la app del libro y la landing page. 🔹 Conectamos Vercel con GitHub para automatizar la publicación de cambios. 📌 ¿Por qué es importante? Vercel permite alojar proyectos web y actualizarlos con cada cambio en GitHub.
+bash
+git init
+git add .
+git commit -m "Inicializando el proyecto"
+git branch -M main
+git remote add origin https://github.com/TU_USUARIO/mdc-libro-digital.git
+git push origin main
+📌 Importancia: GitHub nos permite tener control de versiones y conectar el código con Vercel para el despliegue automático.
 
-📌 2️⃣ PROCESO DE MEJORAS EN LA APP "LIBRO DIGITAL" (mdc-libro-digital)
-✅ Estructura de archivos: 🔹 Organizamos los archivos dentro de public/ para que prologo.html pudiera ser accesible. 🔹 Configuramos correctamente index.html y los enlaces internos.
+✅ Vercel → Lo usamos para alojar y desplegar ambos proyectos. 🔹 Creamos una cuenta y conectamos GitHub con Vercel. 🔹 Subimos mdc-libro-digital y mdc-landing. 📌 Importancia: Vercel nos permite desplegar cambios en tiempo real sin configurar servidores manualmente.
 
-✅ Corrección de errores en Vercel: 🔹 Verificamos "Output Directory" en Vercel, asegurándonos de que sirviera los archivos desde public/. 🔹 Arreglamos errores de configuración que impedían cargar el prólogo correctamente.
+2️⃣ DESARROLLO DE LA APP "LIBRO DIGITAL" (mdc-libro-digital)
+✅ Estructura del proyecto 🔹 Organizamos los archivos en public/ para que fueran accesibles desde el navegador. 🔹 Archivos clave en public/:
 
-✅ Pruebas y ajustes: 🔹 Probamos la URL manualmente (https://mdc-libro-digital.vercel.app/prologo.html) para asegurarnos de que funcionaba. 📌 ¿Por qué es importante? Permitió que los usuarios pudieran acceder a prologo.html correctamente.
+public/
+├── index.html  → Página principal del libro digital
+├── prologo.html → Prólogo del libro
+├── styles.css  → Estilos generales
+├── script.js  → Lógica de la app
+📌 Importancia: Esto garantizó que prologo.html fuera accesible sin configuraciones extra.
 
-📌 3️⃣ CREACIÓN DE LA LANDING PAGE (mdc-landing)
-✅ Diseño y estructura: 🔹 Creaste una página atractiva con secciones clave: presentación del libro, testimonios y botones de acción. 🔹 Incluiste imágenes y optimización SEO (meta tags para descripción, autor y palabras clave).
+✅ Corrección de errores en Vercel 🔹 Inicialmente, Vercel no encontraba favicon.ico y manifest.json, generando errores de protocolo HTTP2. 🔹 Solucionamos el problema asegurando que las rutas en index.html fueran absolutas:
 
-✅ Enlace al prólogo: 🔹 Inicialmente, el botón "Leer el Prólogo" tenía una URL incorrecta (tuapp-librodigital.vercel.app). 🔹 Corregimos la URL para que apuntara a https://mdc-libro-digital.vercel.app/prologo.html.
+html
+<link rel="icon" href="/favicon.ico">
+<link rel="manifest" href="/manifest.json">
+📌 Importancia: Sin esta corrección, los archivos no se cargaban correctamente y la app mostraba pantalla blanca.
 
-✅ Pruebas y correcciones: 🔹 Verificamos cada botón y enlace para asegurarnos de que llevaban a la sección correcta. 📌 ¿Por qué es importante? La landing debía ofrecer una experiencia fluida, permitiendo acceso fácil al contenido del libro.
+✅ Navegación y pruebas 🔹 Probamos https://mdc-libro-digital.vercel.app/prologo.html y verificamos que la app cargaba bien. 🔹 Verificamos la funcionalidad en distintos navegadores y limpiamos caché (Ctrl + Shift + R). 📌 Importancia: Esto nos permitió validar que el libro digital estaba listo para conexión con la landing.
 
-📌 4️⃣ CONEXIÓN ENTRE APP DEL LIBRO Y LANDING PAGE
-✅ Repositorio GitHub: 🔹 Separamos mdc-libro-digital y mdc-landing en dos repositorios para un mejor control. 📌 ¿Por qué es importante? Separar los repositorios evita conflictos en la gestión de cambios.
+3️⃣ CREACIÓN DE LA LANDING PAGE (mdc-landing)
+✅ Diseño y estructura 🔹 Incluimos una presentación del libro con imágenes y animaciones. 🔹 Agregamos optimización SEO (meta tags) para mejorar visibilidad en buscadores. 📌 Importancia: La landing debía ser atractiva y funcional para atraer a lectores.
 
-✅ Deploy en Vercel: 🔹 Cada proyecto (mdc-libro-digital y mdc-landing) se desplegó por separado en Vercel. 🔹 Aseguramos que ambos tenían la configuración correcta (public/ como "Output Directory"). 📌 ¿Por qué es importante? Esto permitió que la landing cargara correctamente la app del libro.
+✅ Corrección de enlace al prólogo 🔹 Inicialmente, el botón "Leer el Prólogo" tenía una URL incorrecta (tuapp-librodigital.vercel.app). 🔹 Corregimos el enlace para que apuntara correctamente:
 
-✅ Corrección final de enlaces: 🔹 El enlace "Accede al libro completo" estaba mal y llevaba a un error 404. 🔹 Lo corregimos para que apuntara a https://mdc-libro-digital.vercel.app. 📌 ¿Por qué es importante? Así los usuarios pueden acceder al contenido completo del libro sin errores.
+html
+<button class="cta" onclick="window.location.href='https://mdc-libro-digital.vercel.app/prologo.html'">Leer el Prólogo</button>
+📌 Importancia: Aseguró que los usuarios pudieran acceder al prólogo sin errores.
 
-📌 5️⃣ PROBLEMAS EN VERCEL Y SOLUCIÓN FINAL
-✅ Problemas: 🔹 Vercel no permitía hacer "Redeploy" en producción. 🔹 Errores de ERR_HTTP2_PROTOCOL_ERROR afectaban favicon.ico y manifest.json.
+✅ Corrección de enlace al libro completo 🔹 Inicialmente, "Accede al libro completo" llevaba a un error 404. 🔹 Corregimos la URL:
 
-✅ Soluciones: 🔹 Creamos un nuevo despliegue manual en Vercel (New Project). 🔹 Configuramos "Framework Preset" como "Other" para HTML puro. 🔹 Establecimos "Build Output Directory" como public/. 📌 ¿Por qué es importante? Esto garantizó un despliegue limpio y sin errores.
+html
+<a href="https://mdc-libro-digital.vercel.app">aquí</a>
+📌 Importancia: Evitamos que los usuarios se encontraran con páginas inexistentes.
 
-✅ Resultado final: 🔹 La landing (mdc-landing) y la app del libro (mdc-libro-digital) ahora funcionan perfectamente. 🔹 Los enlaces están corregidos y conectados correctamente.
+4️⃣ CREACIÓN DE LA APP DE TRIVIA
+✅ Objetivo: Agregar interactividad al proyecto mediante un juego de trivia. 📌 Tecnología usada: HTML + CSS + JavaScript
 
-📌 ¿QUÉ LOGRAMOS EN TOTAL?
-✅ Creación de cuentas en GitHub y Vercel. ✅ Desarrollo y mejora de la app "Libro Digital". ✅ Creación y optimización de la landing page. ✅ Corrección de errores de despliegue y conexión entre ambos proyectos. ✅ Un despliegue exitoso con navegación fluida y sin errores.
+✅ Estructura del código 🔹 Creamos trivia.html, trivia.js y trivia.css. 🔹 Código base en trivia.html:
 
-🚀 Luis, esto fue un trabajo increíble! Ahora tienes una infraestructura web sólida para seguir optimizando y mejorando. 🎉📖💪
+html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia Deportiva</title>
+    <link rel="stylesheet" href="trivia.css">
+</head>
+<body>
+    <h1>Trivia Deportiva</h1>
+    <div id="pregunta"></div>
+    <button onclick="siguientePregunta()">Siguiente Pregunta</button>
+    <script src="trivia.js"></script>
+</body>
+</html>
+🔹 Lógica en trivia.js:
 
-📌 Si quieres seguir modificando o mejorar más funciones, dime y seguimos avanzando juntos! 🔥 ¡Vamos por ello! 🎯
+javascript
+const preguntas = [
+    { pregunta: "¿Quién ganó el Mundial 2014?", respuesta: "Alemania" },
+    { pregunta: "¿Cuántos jugadores tiene un equipo de fútbol?", respuesta: "11" }
+];
+
+let indice = 0;
+
+function siguientePregunta() {
+    if (indice < preguntas.length) {
+        document.getElementById("pregunta").innerText = preguntas[indice].pregunta;
+        indice++;
+    } else {
+        document.getElementById("pregunta").innerText = "¡Fin de la trivia!";
+    }
+}
+📌 Importancia: Esto creó una trivia interactiva para mejorar el engagement en el sitio.
+
+✅ Integración en la landing 🔹 Agregamos un botón que lleva a la trivia desde mdc-landing/index.html:
+
+html
+<button class="cta" onclick="window.location.href='https://mdc-libro-digital.vercel.app/trivia.html'">Jugar Trivia</button>
+📌 Importancia: La trivia hizo que la página fuera más atractiva e interactiva para los usuarios.
+
+5️⃣ DEPLOY FINAL Y AJUSTES EN VERCEL
+✅ Corrección de problemas en producción 🔹 Vercel no permitía redeploy automático, así que creamos un nuevo proyecto desde cero. 🔹 Configuramos "Framework Preset" como "Other" y "Build Output Directory" como public/. 📌 Importancia: Esto eliminó errores acumulados y dejó el despliegue limpio.
+
+✅ Verificación final 🔹 Probamos mdc-libro-digital.vercel.app y mdc-landing.vercel.app. 🔹 Verificamos que todos los botones y enlaces funcionaran bien. 📌 Importancia: Confirmamos que todo quedó bien estructurado y funcional.
+
+📌 RESULTADO FINAL
+🚀 Logramos: ✅ Landing funcional con enlaces correctos. ✅ App del libro digital accesible sin errores. ✅ Trivia integrada y disponible para los usuarios. ✅ Despliegue limpio y optimizado en Vercel.
