@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:wght@600;700&display=swap');
+/* Importar las fuentes de Google Fonts (asegúrate de que esta línea esté al principio del archivo) */
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500;700&display=swap');
 
 .book-container {
   display: flex;
@@ -68,10 +69,14 @@
 }
 
 .book-wrapper {
-  background: #E5E5E5;
+  background: linear-gradient(135deg, #f0f2f5 0%, #e0e5ec 100%); /* Degradado sutil */
   min-height: 100vh;
-  padding: 2rem;
-  font-family: Tahoma, Geneva, Verdana, sans-serif;
+  padding: 3rem 1rem; /* Más espaciado vertical, menos horizontal para mantener el libro centrado */
+  display: flex; /* Añadimos display flex para centrar el contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  font-family: 'Lora', serif; /* Nos aseguramos de usar una fuente moderna y adecuada */
+  transition: all 0.5s ease-in-out; /* Transición suave para cambios futuros */
 }
 
 .titulo-libro {
@@ -162,3 +167,255 @@ p {
   backface-visibility: hidden;
   will-change: transform, opacity;
 }
+
+/* --- NUEVOS ESTILOS PARA LA ESTRUCTURA DEL FLIPBOOK --- */
+
+/* Contenedor principal de la sección del Flipbook */
+.flipbook-section-wrapper {
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  flex-direction: column; /* Apila el contenido verticalmente si es necesario */
+  padding: 20px; /* Espaciado general alrededor de la sección */
+  min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la vista */
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+/* Contenedor que agrupa el libro y sus controles directos */
+.book-and-controls-container {
+  display: flex;
+  flex-direction: column; /* Por defecto, apila los controles y el libro verticalmente (útil para móvil) */
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  gap: 20px; /* Espacio entre los controles y el libro */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 900px; /* Limita el ancho máximo para evitar que se estire demasiado en pantallas grandes */
+  margin: auto; /* Centra el contenedor en la página */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+  padding: 0 10px; /* Añade un pequeño padding horizontal para evitar que el contenido toque los bordes de la pantalla en móvil */
+}
+
+/* Controles de navegación (flechas, home) */
+.book-controls {
+  display: flex;
+  gap: 15px; /* Espacio entre los botones */
+  justify-content: center; /* Centra los botones horizontalmente */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 10px 0; /* Espaciado vertical */
+  flex-wrap: wrap; /* Permite que los botones se envuelvan si la pantalla es muy pequeña */
+}
+
+/* Contenedor del libro, buscador y número de página */
+.book-main-content {
+  display: flex;
+  flex-direction: column; /* Por defecto, apila el libro y el buscador/página verticalmente */
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  gap: 15px; /* Espacio entre el libro y el bloque de búsqueda */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  padding: 0 10px; /* Añade un pequeño padding horizontal para que el libro no toque los bordes */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el tamaño total */
+}
+
+/* Contenedor para agrupar la barra de búsqueda y el número de página */
+.search-and-page-info {
+  display: flex;
+  flex-direction: column; /* Apila búsqueda y número de página verticalmente */
+  gap: 10px; /* Espacio entre la búsqueda y el número de página */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 400px; /* Limita el ancho para que no se vea demasiado ancho */
+  text-align: center; /* Centra el texto del número de página */
+}
+
+/* --- MODIFICACIONES A ESTILOS EXISTENTES --- */
+
+/* Modificar .book-container para centrar el flipbook */
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Asegura que ocupe el ancho disponible */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada para el libro */
+  border-radius: 8px; /* Bordes ligeramente más redondeados */
+  overflow: hidden; /* Asegura que las sombras y bordes se apliquen correctamente */
+}
+
+/* Asegurar que el flip-book ocupe el espacio */
+.flip-book {
+  width: 100% !important; /* Asegura que el flipbook ocupe el 100% del contenedor */
+  height: auto !important; /* Altura automática para mantener la proporción */
+  box-shadow: none; /* La sombra se la daremos al .book-container */
+}
+
+/* Estilos para las páginas individuales */
+.page {
+  background-color: #fefefe; /* Blanco más puro para las páginas */
+  padding: 30px 20px; /* Ajuste de padding */
+  margin: 0; /* Eliminar margen para que las páginas se ajusten mejor */
+  font-size: 16px; /* Ajuste de tamaño de fuente */
+  line-height: 1.6; /* Ajuste de interlineado */
+  text-align: justify;
+  font-family: 'Lora', serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Borde muy sutil para definición */
+  border-radius: 6px; /* Bordes ligeramente más redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra más definida pero suave */
+  color: #333;
+}
+
+/* Estilos para los botones de navegación (ya existentes, pero revisados) */
+.nav-button {
+  background: linear-gradient(145deg, #FFD700, #FFC000); /* Degradado dorado */
+  color: #333;
+  border: none;
+  padding: 0.8rem 1.8rem; /* Más grandes y fáciles de tocar */
+  font-size: 1.2rem;
+  border-radius: 30px; /* Más redondeados */
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra más pronunciada */
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.8px; /* Más espaciado entre letras */
+  position: relative; /* Para efectos de pseudo-elementos si los añadimos */
+  overflow: hidden; /* Para animaciones de fondo si las añadimos */
+}
+
+.nav-button:hover {
+  transform: translateY(-4px); /* Efecto de "levantamiento" al pasar el ratón */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(145deg, #FFC000, #FFD700); /* Invierte el degradado al pasar el ratón */
+}
+
+.nav-button:active {
+  transform: translateY(0); /* Vuelve a la posición normal al hacer clic */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para la barra de búsqueda */
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px; /* Más espacio entre input y botón */
+  margin-bottom: 0; /* Eliminamos el margen inferior, ya lo maneja el contenedor padre */
+  background-color: #ffffff; /* Fondo blanco para la barra */
+  padding: 10px 20px; /* Espaciado interno */
+  border-radius: 30px; /* Bordes redondeados */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 450px; /* Limita el ancho */
+  width: 100%; /* Ocupa el ancho disponible */
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+}
+
+.search-bar input {
+  flex-grow: 1; /* Permite que el input ocupe el espacio disponible */
+  padding: 0.7rem 1.2rem; /* Más padding para el input */
+  border: 1px solid #ccc; /* Borde más suave */
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 1rem;
+  outline: none; /* Elimina el contorno al enfocar */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #FFD700; /* Borde amarillo al enfocar */
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3); /* Sombra de enfoque sutil */
+}
+
+.search-bar button {
+  background: linear-gradient(145deg, #0056b3, #004085); /* Degradado azul para el botón de búsqueda */
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem; /* Más padding */
+  border-radius: 25px; /* Más redondeados */
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Sombra para el botón */
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.search-bar button:hover {
+  background: linear-gradient(145deg, #004085, #0056b3); /* Invierte el degradado al pasar el ratón */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para el número de página */
+.page-number {
+  font-size: 1rem; /* Ligeramente más grande */
+  color: #555; /* Color de texto más suave */
+  margin-top: 5px;
+  font-weight: 500; /* Un poco más de peso */
+}
+
+/* --- MEDIA QUERIES PARA RESPONSIVIDAD (MÓVIL vs. ESCRITORIO) --- */
+
+@media (min-width: 768px) { /* Estilos para pantallas de tablet y escritorio */
+  .book-and-controls-container {
+    flex-direction: row; /* En escritorio, coloca los controles al lado del libro */
+    justify-content: center; /* Centra el conjunto de libro + controles */
+    align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
+    gap: 40px; /* Más espacio entre el libro y los controles */
+  }
+
+  .book-controls {
+    flex-direction: column; /* Apila los botones de navegación verticalmente */
+    width: auto; /* Ancho automático para los controles */
+    padding: 0; /* Elimina padding extra */
+    margin-top: 50px; /* Alinea los controles con la parte superior del libro */
+    gap: 20px; /* Espacio entre botones */
+  }
+
+  .book-main-content {
+    flex-direction: column; /* Mantiene libro y búsqueda/página apilados */
+    align-items: center; /* Centra el libro y la info */
+    width: auto; /* Ancho automático para el contenido principal del libro */
+    padding: 0; /* Elimina padding horizontal en desktop */
+  }
+
+  .search-and-page-info {
+    flex-direction: row; /* En escritorio, coloca búsqueda y número de página en fila */
+    justify-content: center; /* Centra horizontalmente */
+    gap: 30px; /* Espacio entre búsqueda y número de página */
+    margin-top: 20px; /* Margen superior para separarlo del libro */
+  }
+
+  .page-number {
+    margin-top: 0; /* Elimina margen superior en desktop */
+  }
+}
+
+/* Asegurar que el título principal de la app (en App.js) use la fuente Playfair Display */
+.app-header h1 {
+  font-family: 'Playfair Display', serif; /* Aplica la fuente de títulos */
+  font-weight: 700;
+  color: #222; /* Color oscuro */
+}
+
+/* Asegurar que el título del libro dentro del flipbook también use Playfair Display */
+.titulo-libro {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+/* Asegurar que los párrafos usen Lora */
+p {
+  font-family: 'Lora', serif;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
